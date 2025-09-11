@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Plan - TraWell</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .back-btn {
+            background: #e2e8f0;
+            color: #4a5568;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #cbd5e0;
+            transform: translateY(-1px);
+        }
+
+        .main {
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #2d3748;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+            color: #2d3748;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #a0aec0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .form-help {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 4px;
+        }
+
+        .error {
+            border-color: #e53e3e !important;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .back-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            
+            .main {
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">TraWell</div>
+        <button class="back-btn"><a style="text-decoration: none;" href="/dashboard">← Back to Dashboard</a></button>
+    </header>
+
+    <main class="main">
+        <h1 class="page-title">Create New Travel Plan</h1>
+        
+        <div class="form-container">
+            <form id="planForm" action="/plans/new" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="title">Plan Title</label>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        name="title" 
+                        class="form-input" 
+                        placeholder="e.g., Weekend Getaway to Goa"
+                        required
+                    >
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="days">Number of Days</label>
+                        <input 
+                            type="number" 
+                            id="days" 
+                            name="days" 
+                            class="form-input" 
+                            placeholder="7"
+                            min="1"
+                            max="365"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="persons">Number of Persons</label>
+                        <input 
+                            type="number" 
+                            id="persons" 
+                            name="persons" 
+                            class="form-input" 
+                            placeholder="2"
+                            min="1"
+                            max="50"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="budget">Total Budget (₹)</label>
+                    <input 
+                        type="text" 
+                        id="budget" 
+                        name="budget" 
+                        class="form-input" 
+                        placeholder="25000"
+                        pattern="[0-9]+"
+                        title="Please enter numbers only"
+                        required
+                    >
+                    <div class="form-help">Enter amount in Indian Rupees (numbers only)</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="city">Destination City</label>
+                    <select id="city" name="city" class="form-select" required>
+                        <option value="">Select a city</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Ahmedabad">Ahmedabad</option>
+                        <option value="Jaipur">Jaipur</option>
+                        <option value="Surat">Surat</option>
+                        <option value="Lucknow">Lucknow</option>
+                        <option value="Kanpur">Kanpur</option>
+                        <option value="Nagpur">Nagpur</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Agra">Agra</option>
+                        <option value="Varanasi">Varanasi</option>
+                        <option value="Kochi">Kochi</option>
+                        <option value="Mysore">Mysore</option>
+                        <option value="Udaipur">Udaipur</option>
+                        <option value="Jodhpur">Jodhpur</option>
+                        <option value="Amritsar">Amritsar</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Coimbatore">Coimbatore</option>
+                        <option value="Madurai">Madurai</option>
+                        <option value="Shimla">Shimla</option>
+                        <option value="Manali">Manali</option>
+                        <option value="Darjeeling">Darjeeling</option>
+                        <option value="Ooty">Ooty</option>
+                        <option value="Rishikesh">Rishikesh</option>
+                        <option value="Haridwar">Haridwar</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="reset" class="btn btn-secondary">
+                        Reset
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Generate Plan Now
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+
+</body>
+</html>

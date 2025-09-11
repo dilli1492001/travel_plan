@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TraWell</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .new-plan-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .new-plan-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .main {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #2d3748;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .city-name {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #2d3748;
+            flex-grow: 1;
+        }
+
+        .plan-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .edit-btn {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .edit-btn:hover {
+            background: #cbd5e0;
+        }
+
+        .delete-btn {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .delete-btn:hover {
+            background: #feb2b2;
+        }
+
+        .plan-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 16px;
+        }
+
+        .budget {
+            color: #38a169;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #718096;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #4a5568;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .new-plan-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            
+            .main {
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">TraWell</div>
+        <button class="new-plan-btn"><a style="text-decoration: none; color: white;" href="/plans/new">+ New Plan</a></button>
+        <button class="new-plan-btn"><a style="text-decoration: none; color: white;" href="/logout"></a>Logout</button>
+    </header>
+
+    <main class="main">
+        <h1 class="page-title">My Travel Plans</h1>
+        
+        <div class="plans-grid" id="plansGrid">
+            <!-- Sample plans will be generated by JavaScript -->
+
+            {% for plan in plans %}
+
+                        <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="city-name">{{plan.title}}</div>
+                        <div class="plan-actions">
+                            <button class="action-btn edit-btn" ><a style="text-decoration: none;" href="/plans/edit/{{plan.id}}">Edit</a></button>
+                            <button class="action-btn delete-btn""><a style="text-decoration: none;" href="/plans/delete/{{plan.id}}">Delete</a></button>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Budget</span>
+                            <span class="detail-value budget">{{ plan.budget }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Stay Duration</span>
+                            <span class="detail-value">{{plan.days}}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+                    </div>
+            
+    </main>
+
+    
+    </script>
+</body>
+</html>
