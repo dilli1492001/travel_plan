@@ -4,7 +4,7 @@ import resend
 
 
 def send_email(email,ai_plan,city):
-    resend.api_key = "re_Zyi4GKYN_HpR8VvRqj54NCEsP64VGnRRH"
+    resend.api_key = "xxxxxxxxxxxxxxxxxxxxxxx"
     r = resend.Emails.send({
     "from": "onboarding@resend.dev",
     "to": email,
